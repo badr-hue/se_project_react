@@ -1,15 +1,21 @@
 import './Main.css';
-import WeatherCard from '../WeatherCard/WeatherCard.jsx';
+import {defaultClothingItems} from "../../utils/constants.js";
+import WeatherCard from "../WeatherCard/WeatherCard.jsx";
+import ItemCard from "../ItemCard/ItemCard.jsx";
 
-function Main() {
+function Main({ weatherData }) {
   return (
     <main className="main">
       <h1>Main Component</h1>
       <p>This is the main content area.</p>
-      <WeatherCard />
+      <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">Today is 75 &deg; F / You may want to wear:</p>
-        {/*add your cards here*/}
+        <ul className="cards__list">
+          {defaultClothingItems.filter((item) => {return item.weather === weatherData.condition}).map((item) => (
+            <ItemCard key={item._id} item={item} />
+          ))}
+        </ul>
       </section>
     </main>
     

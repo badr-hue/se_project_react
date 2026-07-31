@@ -1,14 +1,21 @@
+import { useState } from 'react';
 import './App.css'
 import Main from '../Main/Main.jsx';
 import Header from '../Header/Header.jsx';
 
 function App() {
   
+  const [weatherData, setWeatherData] = useState({
+    temperature: 75,
+    condition: 'Sunny',
+    icon: 'sunny.svg',
+  });
+
   return (
     <div className="page">
       <div className="page__content">
         <Header />
-        <Main />
+        <Main weatherData={weatherData} />
         
       </div>
     </div>
