@@ -7,7 +7,7 @@ function App() {
   
   const [weatherData, setWeatherData] = useState({
     temperature: 75,
-    condition: 'Sunny',
+    condition: 'hot',
     icon: 'sunny.svg',
   });
 
