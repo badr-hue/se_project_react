@@ -12,15 +12,23 @@ export const getWeather = ({latitude , longtitude}, APIkey) => {
 export const filterWeatherData = (data) => {
     const result = {};
     result.city = data.name;
-    result.temperature = Math.round(data.main.temp);
+    result.temperature = { F: Math.round(data.main.temp) };
     result.condition = data.weather[0].main.toLowerCase();
     result.icon = data.weather[0].icon;
-    result.type = getWeatherCondition(result.temperature);
+    result.isDay = isDay(data.sys, Date.now());
+    result.type = getWeatherCondition(result.temperature.F);
 
     return result;
 };
 
-export const getWeatherCondition  = (temparature) => {
+const isDay = ({ sunrise, sunset}, currentTime ) =>{
+  
+ if(sunrise*1000 < currentTime && currentTime < sunset*1000){
+    return true;
+ }
+};
+
+export const getWeatherCondition  = (temperature) => {
 
      if (temperature >= 86) {
    return 'hot';
@@ -30,4 +38,4 @@ export const getWeatherCondition  = (temparature) => {
    return 'cold';
  }
 
-}
+};
