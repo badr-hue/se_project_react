@@ -1,4 +1,71 @@
 // The utils files contain default clothing items
+
+export const weatherOptions = [
+  // Light / Day
+  {
+    day: true,
+    condition: "clear",
+    url: new URL("../assets/light/clear.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "cloudy",
+    url: new URL("../assets/light/cloudy_day.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "fog",
+    url: new URL("../assets/light/fog_day.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "rain",
+    url: new URL("../assets/light/rain_day.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "snow",
+    url: new URL("../assets/light/snow_day.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "storm",
+    url: new URL("../assets/light/storm_day.svg", import.meta.url).href,
+  },
+
+  // Dark / Night
+  {
+    day: false,
+    condition: "clear",
+    url: new URL("../assets/dark/clear.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "cloudy",
+    url: new URL("../assets/dark/cloudy_night.svg", import.meta.url).href, 
+  },
+  {
+    day: false,
+    condition: "fog",
+    url: new URL("../assets/dark/fog_night.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "rain",
+    url: new URL("../assets/dark/rain_night.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "snow",
+    url: new URL("../assets/dark/snow_night.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "storm",
+    url: new URL("../assets/dark/storm_night.svg", import.meta.url).href,
+  },
+];
+
 export const defaultClothingItems = [
   {
     _id: 1,
