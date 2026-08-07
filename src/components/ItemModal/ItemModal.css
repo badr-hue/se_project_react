@@ -1,0 +1,100 @@
+/* Shared modal overlay (works for both modals) */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0.3s,
+    opacity 0.3s;
+  z-index: 1000;
+}
+
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ========== Item Preview Modal ========== */
+.modal__content_type_image {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 10px;
+  max-width: 670px;
+  width: 90%;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.modal__footer {
+  padding: 20px 28px 28px;
+}
+
+.modal__caption {
+  margin: 0 0 8px;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000;
+}
+
+.modal__weather {
+  margin: 0;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000;
+}
+
+/* Close button (shared) */
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0; /* hide text "CLOSE" */
+  z-index: 10;
+}
+
+.modal__close::before,
+.modal__close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  background-color: #000;
+}
+
+.modal__close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.modal__close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal__close:hover::before,
+.modal__close:hover::after {
+  background-color: #666;
+}

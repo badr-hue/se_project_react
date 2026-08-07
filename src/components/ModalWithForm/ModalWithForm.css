@@ -1,61 +1,145 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #0000004D;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
 }
 
-.modal_opened{
-    visibility: visible;
-    transition: visibility 0.3s ease-in-out;
+.modal_opened {
+  visibility: visible;
+  transition: visibility 0.3s ease-in-out;
 }
 
 .modal__title {
-    margin: 0;
+  margin: 0 0 24px;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000;
 }
 
 .modal__close {
-    position: absolute;
-    top: 20px;
-    right: 28px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .modal__content {
-    background-color: #FFFFFF;
-    position: relative;
-    padding: 28px 28px 36px;
-    border-radius: 8px;
-    max-width: 496px;
-    width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  position: relative;
+  padding: 28px 28px 36px;
+  border-radius: 8px;
+  max-width: 496px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modal__form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .modal__input {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
+  padding: 0 0 8px;
+  border: none;
+  border-bottom: 1px solid #0000004d;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
 }
 
 .modal__radio-buttons {
-    border: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__input::placeholder {
+  color: #0000004d;
+}
+
+.modal__input:focus {
+  border-bottom-color: #000;
+}
+
+.modal__radio-buttons {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__legend {
+  margin: 0 0 12px;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+.modal__label_type_radio {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.modal__radio-input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #000;
+  cursor: pointer;
+}
+
+.modal__submit {
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #e8e8e8;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.modal__submit:hover {
+  background-color: #d0d0d0;
+}
+
+.modal__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

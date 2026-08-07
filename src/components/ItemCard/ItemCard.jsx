@@ -1,16 +1,20 @@
-import './ItemCard.css';
-import {defaultClothingItems} from "../../utils/constants.js";
+import "./ItemCard.css";
+import { defaultClothingItems } from "../../utils/constants.js";
 
 function ItemCard({ item, onCardClick }) {
-
   const handleCardClick = () => {
     onCardClick(item);
-  }
+  };
 
   return (
-    <li className="card" key={item._id} >
+    <li className="card" key={item._id}>
       <h2 className="card__name">{item.name}</h2>
-      <img src={item.link} alt={item.name} className="card__image" onClick={handleCardClick}  />
+      <img
+        src={item.link}
+        alt={item.name}
+        className="card__image"
+        onClick={handleCardClick}
+      />
     </li>
   );
 }

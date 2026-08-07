@@ -1,9 +1,8 @@
-import './Header.css';
+import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
 
-function Header({ handleAddClick , weatherData }) {
-  
+function Header({ handleAddClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -11,15 +10,21 @@ function Header({ handleAddClick , weatherData }) {
 
   return (
     <header className="header">
-     <img className="header__logo" src={logo} alt="Logo" />
-     <p className="header__date-and-location">{currentDate} - {weatherData.city}</p>
-     <button type="button" className="header__add-clothes-btn" onClick={handleAddClick}>
-       + Add Clothes
-     </button>
-     <div className="header__user-container">
+      <img className="header__logo" src={logo} alt="Logo" />
+      <p className="header__date-and-location">
+        {currentDate} - {weatherData.city}
+      </p>
+      <button
+        type="button"
+        className="header__add-clothes-btn"
+        onClick={handleAddClick}
+      >
+        + Add Clothes
+      </button>
+      <div className="header__user-container">
         <p className="header__username">Terrence Tegegne</p>
-       <img className="header__avatar" src={avatar} alt="User Avatar" />
-     </div>
+        <img className="header__avatar" src={avatar} alt="User Avatar" />
+      </div>
     </header>
   );
 }
