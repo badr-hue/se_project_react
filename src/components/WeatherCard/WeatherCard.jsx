@@ -24,9 +24,7 @@ function WeatherCard({ weatherData }) {
         alt={`Card showing ${weatherOption?.day ? "day" : "night"}time for ${weatherOptionCondition}`}
         className="weather-card__image"
       />
-      <h2>Weather Card</h2>
-      <p>This is a weather card component.</p>
-    </section>
+     </section>
   );
 }
 

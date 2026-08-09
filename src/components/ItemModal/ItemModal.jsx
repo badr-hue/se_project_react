@@ -14,9 +14,7 @@ function ItemModal({
   }
   return (
     <div
-      className={`modal ${isOpen ? "modal_opened" : ""}`}
-      onClick={onClose}
-    >
+      className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_image">
         <button type="button" className="modal__close" onClick={onClose}>
           <img src={closeBtn} alt="Close" />
