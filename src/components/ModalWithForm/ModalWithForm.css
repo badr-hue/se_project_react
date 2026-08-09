@@ -9,11 +9,13 @@
   justify-content: center;
   align-items: center;
   visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal_opened {
   visibility: visible;
-  transition: visibility 0.3s ease-in-out;
+  opacity: 1;
 }
 
 .modal__title {
@@ -66,15 +68,6 @@
   background: transparent;
   outline: none;
   box-sizing: border-box;
-}
-
-.modal__radio-buttons {
-  border: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .modal__input::placeholder {

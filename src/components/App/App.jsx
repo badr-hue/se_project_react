@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Main from "../Main/Main.jsx";
 import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
-import { getWeather } from "../../utils/weatherApi.js";
-import { coordinates, APIkey } from "../../utils/constants.js";
-import { filterWeatherData } from "../../utils/weatherApi.js";
-import { getWeatherCondition } from "../../utils/weatherApi.js";
+import { getWeather, filterWeatherData, getWeatherCondition } from "../../utils/weatherApi.js";
+import { coordinates, APIkey, defaultClothingItems } from "../../utils/constants.js";
+
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -17,6 +17,8 @@ function App() {
     icon: "sunny.svg",
     city: "",
   });
+
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -35,7 +37,7 @@ function App() {
   };
 
   useEffect(() => {
-    // Fetch weather data from the API and update the state
+    
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
@@ -48,24 +50,23 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Main weatherData={weatherData} handleCardClick={handleCardClick} clothingItems={clothingItems} />
       </div>
       <ModalWithForm
-        title="New Garment"
-        onClose={() => setActiveModal("")}
-        buttonText="Add Garment"
-        activeModal={activeModal}
-        onClose={closeActiveModal}
+      isOpen={activeModal === "add-garment"}
+      title="New Garment"
+      buttonText="Add Garment"
+      onClose={closeActiveModal}
       />
-      {/*      <p>This is the modal content.</p>
-      </ModalWithForm> */}
+      
 
       <ItemModal
         title="Garment Preview"
         card={selectedCard}
-        activeModal={activeModal}
+        isOpen={activeModal === "preview"}
         onClose={closeActiveModal}
       />
+      <Footer />
     </div>
   );
 }

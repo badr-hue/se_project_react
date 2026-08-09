@@ -1,9 +1,15 @@
+import React from "react";
 import "./Footer.css";
 
-export default function Footer() {
+function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer">
-      <p className="footer__text">© 2024 WeatherWear</p>
+      <span className="footer__name">Developed by Badr Labloul</span>
+      <span className="footer__year">{currentYear}</span>
     </footer>
   );
 }
+
+export default Footer;

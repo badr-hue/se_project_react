@@ -1,4 +1,4 @@
-/* Shared modal overlay (works for both modals) */
+
 .modal {
   position: fixed;
   inset: 0;
@@ -8,9 +8,7 @@
   align-items: center;
   visibility: hidden;
   opacity: 0;
-  transition:
-    visibility 0.3s,
-    opacity 0.3s;
+ transition: visibility 0.3s, opacity 0.3s;
   z-index: 1000;
 }
 
