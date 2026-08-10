@@ -6,8 +6,8 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <span className="footer__name">Developed by Badr Labloul</span>
-      <span className="footer__year">{currentYear}</span>
+      <p className="footer__name">Developed by Badr Labloul</p>
+      <p className="footer__year">{currentYear}</p>
     </footer>
   );
 }
