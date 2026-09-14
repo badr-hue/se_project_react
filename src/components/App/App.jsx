@@ -3,30 +3,46 @@ import "./App.css";
 import Main from "../Main/Main.jsx";
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
-import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+// import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { getWeather, filterWeatherData, getWeatherCondition } from "../../utils/weatherApi.js";
 import { coordinates, APIkey, defaultClothingItems } from "../../utils/constants.js";
+import CurrentTemperatureUnitConext from "../../contexts/currentTemperatureUnitContext.jsx";
+import {Route, Routes} from "react-router-dom";
+
 
 
 function App() {
   const [weatherData, setWeatherData] = useState({
-    temperature: { F: 75 },
+    temperature: { F: 75, C:25 },
     condition: "hot",
     type: "cold",
     icon: "sunny.svg",
     city: "",
+    isDay: true,
   });
 
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  const handleToggleSwitchChange = () => {
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C":"F");
+  };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
+
+  const onAddItem = (inputValues) => {
+    const newCardData = {name: inputValues.name, imageUrl: inputValues.imageUrl, weather: inputValues.weather};
+    setClothingItems([...clothingItems, newCardData]);
+    setActiveModal("");
+  }
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -47,13 +63,17 @@ function App() {
   }, []);
 
   return (
+    <CurrentTemperatureUnitConext.Provider value={{currentTemperatureUnit, handleToggleSwitchChange}}>
     <div className="page">
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} clothingItems={clothingItems} />
+        <Routes>
+          <Route path="/" element={<Main weatherData={weatherData} handleCardClick={handleCardClick} clothingItems={clothingItems} />} />
+          <Route path="/profile" element={<p>PROFILE</p>} />
+        </Routes>
       </div>
 
-  <ModalWithForm
+  {/* <ModalWithForm
   isOpen={activeModal === "add-garment"}
   title="New Garment"
   buttonText="Add Garment"
@@ -115,7 +135,13 @@ function App() {
       Cold
     </label>
   </fieldset>
-  </ModalWithForm>
+  </ModalWithForm> */}
+
+  <AddItemModal 
+  isOpen={activeModal === "add-garment"}
+  onClose={closeActiveModal}
+  onAddItem={onAddItem}
+  />
       
 
       <ItemModal
@@ -126,6 +152,7 @@ function App() {
       />
       <Footer />
     </div>
+    </CurrentTemperatureUnitConext.Provider>
   );
 }
 
