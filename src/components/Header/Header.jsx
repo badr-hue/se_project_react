@@ -3,6 +3,7 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
 import { useState, useEffect } from "react";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
+import {NavLink} from "react-router-dom";
 
 function Header({ handleAddClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -12,7 +13,9 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      <img className="header__logo" src={logo} alt="Logo" />
+      <NavLink to="/" className="header__logo-link">
+        <img className="header__logo" src={logo} alt="Logo" />
+      </NavLink>
       <p className="header__date-and-location">
         {currentDate} - {weatherData.city}
       </p>
@@ -26,10 +29,12 @@ function Header({ handleAddClick, weatherData }) {
         
         + Add Clothes
       </button>
+      <NavLink to="/profile" className="header__profile-link">
       <div className="header__user-container">
         <p className="header__username">Terrence Tegegne</p>
         <img className="header__avatar" src={avatar} alt="User Avatar" />
       </div>
+      </NavLink>
     </header>
   );
 }
