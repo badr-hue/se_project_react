@@ -46,7 +46,7 @@ function App() {
     addItem(newCardData)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
-        setActiveModal("");
+        closeActiveModal("");
       })
       .catch(console.error);
   };
@@ -92,6 +92,18 @@ function App() {
     };
   }, [coordinates, APIkey]);
 
+useEffect(() => {
+  const closeByEscape = (e) => {
+    if (e.key === "Escape") {
+      closeActiveModal();
+    }
+  };
+
+  document.addEventListener("keydown", closeByEscape);
+
+  return () => document.removeEventListener("keydown", closeByEscape);
+}, []);
+
   return (
     <CurrentTemperatureUnitConext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -116,6 +128,7 @@ function App() {
                 <Profile
                   clothingItems={clothingItems}
                   handleCardClick={handleCardClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             />
