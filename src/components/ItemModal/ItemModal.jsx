@@ -13,7 +13,7 @@ function ItemModal({
 
   function handleDeleteClick() {
     
-    onDelete(card._id || card.id);
+     onDelete(card._id ?? card.id);
   }
 
   return (

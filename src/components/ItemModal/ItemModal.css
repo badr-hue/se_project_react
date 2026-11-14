@@ -45,11 +45,13 @@
 .modal__footer {
   padding: 20px 32px 24px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  align-items: center;
 }
 
 .modal__caption {
-  margin: 0 0 12px 0;
+  margin: 0;
   font-family: "Cabinet Grotesk", Arial, sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -58,7 +60,8 @@
 }
 
 .modal__weather {
-  margin: 0 0 20px 0;
+  margin: 12px 0 0; 
+  width: 100%;
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 16px;

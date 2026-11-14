@@ -1,6 +1,8 @@
 .page {
   background-color: #f3f3f3;
   font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
 }
 
 .page__content {
