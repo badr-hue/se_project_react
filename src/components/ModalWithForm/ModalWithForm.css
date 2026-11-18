@@ -78,6 +78,17 @@
   border-bottom-color: #000;
 }
 
+.modal__input_invalid,
+.modal__input_invalid:focus {
+  border-bottom-color: #d32f2f;
+}
+
+.modal__input-error {
+  color: #d32f2f;
+  font-size: 12px;
+  line-height: 16px;
+}
+
 .modal__radio-buttons {
   border: none;
   margin: 0;

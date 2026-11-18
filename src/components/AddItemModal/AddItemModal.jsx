@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useForm } from "../../hooks/useForm";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const defaultValues = {
@@ -8,18 +8,52 @@ const defaultValues = {
   weather: "hot"
 };
 
+function validateAddItemForm(values) {
+  const errors = {};
+
+  if (!values.name.trim()) {
+    errors.name = "Name is required.";
+  }
+
+  if (!values.imageUrl.trim()) {
+    errors.imageUrl = "Image URL is required.";
+  } else {
+    try {
+      const imageUrl = new URL(values.imageUrl);
+      if (imageUrl.protocol !== "http:" && imageUrl.protocol !== "https:") {
+        errors.imageUrl = "Enter a valid HTTP or HTTPS URL.";
+      }
+    } catch {
+      errors.imageUrl = "Enter a valid HTTP or HTTPS URL.";
+    }
+  }
+
+  return errors;
+}
+
 function AddItemModal({ isOpen, onAddItem, onClose }) {
-  const { values, handleChange, setValues } = useForm(defaultValues);
+  const {
+    values,
+    errors,
+    handleChange,
+    validateForm,
+    resetForm,
+  } = useFormWithValidation(defaultValues, validateAddItemForm);
 
   useEffect(() => {
     if (isOpen) {
-      setValues(defaultValues);
+      resetForm();
     }
-  }, [isOpen, setValues]);
+  }, [isOpen, resetForm]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+
     onAddItem(values);
+    resetForm();
   }
 
   return (
@@ -34,26 +68,44 @@ function AddItemModal({ isOpen, onAddItem, onClose }) {
         Name: {" "}
         <input
           type="text"
-          className="modal__input"
           id="name"
           name="name"
           placeholder="Name"
           value={values.name}
           onChange={handleChange}
-          required />
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
+          className={`modal__input${errors.name ? " modal__input_invalid" : ""}`}
+        />
+        {errors.name && (
+          <span id="name-error" className="modal__input-error" aria-live="polite">
+            {errors.name}
+          </span>
+        )}
       </label>
 
       <label htmlFor="imageUrl" className="modal__label">
         Image URL: {" "}
         <input
-          type="url"
-          className="modal__input"
+          type="text"
           id="imageUrl"
           name="imageUrl"
           placeholder="Image URL"
           value={values.imageUrl}
           onChange={handleChange}
-          required />
+          aria-invalid={Boolean(errors.imageUrl)}
+          aria-describedby={errors.imageUrl ? "imageUrl-error" : undefined}
+          className={`modal__input${errors.imageUrl ? " modal__input_invalid" : ""}`}
+        />
+        {errors.imageUrl && (
+          <span
+            id="imageUrl-error"
+            className="modal__input-error"
+            aria-live="polite"
+          >
+            {errors.imageUrl}
+          </span>
+        )}
       </label>
 
       <fieldset className="modal__radio-buttons">

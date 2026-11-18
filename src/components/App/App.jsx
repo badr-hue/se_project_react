@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import { coordinates, APIkey } from "../../utils/constants.js";
+import { APIkey, fallbackCoordinates } from "../../utils/constants.js";
 import CurrentTemperatureUnitConext from "../../contexts/currentTemperatureUnitContext.jsx";
 import { Route, Routes } from "react-router-dom";
 import Profile from "../Profile/Profile.jsx";
@@ -73,24 +73,50 @@ function App() {
   useEffect(() => {
     let isMounted = true;
 
-    Promise.all([
-      getWeather(coordinates, APIkey).then((data) => {
-        if (isMounted) {
-          const filteredData = filterWeatherData(data);
-          setWeatherData(filteredData);
-        }
-      }),
-      getItems().then((data) => {
+    const fetchWeather = (coordinates) => {
+      getWeather(coordinates, APIkey)
+        .then((data) => {
+          if (isMounted) {
+            setWeatherData(filterWeatherData(data));
+          }
+        })
+        .catch(console.error);
+    };
+
+    const useFallbackLocation = (error) => {
+      console.error("Unable to retrieve your location; using Monroe, Louisiana:", error);
+      fetchWeather(fallbackCoordinates);
+    };
+
+    if (!navigator.geolocation) {
+      useFallbackLocation(
+        new Error("Geolocation is not supported by this browser.")
+      );
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        ({ coords }) => {
+          fetchWeather({
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          });
+        },
+        useFallbackLocation,
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+      );
+    }
+
+    getItems()
+      .then((data) => {
         if (isMounted) {
           setClothingItems(data);
         }
-      }),
-    ]).catch(console.error);
+      })
+      .catch(console.error);
 
     return () => {
       isMounted = false;
     };
-  }, [coordinates, APIkey]);
+  }, []);
 
 useEffect(() => {
   const closeByEscape = (e) => {
